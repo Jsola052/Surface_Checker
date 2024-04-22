@@ -24,7 +24,7 @@ def home(robot, acc, vel):
     home_position = (deg2rad(-90), deg2rad(-90), deg2rad(-90), deg2rad(-90), deg2rad(90), deg2rad(0))
     robot.movej(home_position, acc, vel)
 
-# Calculate the orientation for grinding based on the points
+# Calculate the orientation for surface check based on the points
 def vector_to_euler_angles(target_normal):
    initial_vector = np.array([0, 0, 1])
    target_normal = normalize(target_normal)
@@ -46,16 +46,16 @@ def getMarker(robot, tool_changer, unlock, lock, marker_payload, marker_tcp):
     home(robot)
     robot.set_tcp((0,0,0,0,0,0))
     tool_changer.write(unlock)
-    robot.movel((0.25525, -0.69405, 0.29491, 0, 3.141, -0.007), 0.7, 0.7)
-    robot.movel((0.25525, -0.69407, 0.07763, 0, 3.141, -0.007), 0.7, 0.7)
-    robot.movel((0.25521, -0.69403, 0.00607, 0.001, 3.141, -0.006), 0.1, 0.1)
+    robot.movel((0.26055, -0.03720, 0.48702, 2.204, 2.247, -0.067), 0.7, 0.7)
+    robot.movel((0.26055, -0.03720, 0.28893, 2.204, 2.247, -0.067), 0.7, 0.7)
+    robot.movel((0.26055, -0.03720, 0.23795, 2.204, 2.247, -0.067), 0.05, 0.05)
     time.sleep(0.2)  
     tool_changer.write(lock)
     time.sleep(0.2)
     robot.set_payload(marker_payload)
     time.sleep(0.2)
-    robot.movel((0.25525, -0.69407, 0.07763, 0, 3.141, -0.007), 0.2, 0.2)
-    robot.movel((0.25525, -0.69405, 0.29491, 0, 3.141, -0.007), 0.7, 0.7)
+    robot.movel((0.26055, -0.03720, 0.28893, 2.204, 2.247, -0.067), 0.1, 0.1)
+    robot.movel((0.26055, -0.03720, 0.48702, 2.204, 2.247, -0.067), 0.7, 0.7)
     home(robot)
     robot.set_tcp(marker_tcp)
     time.sleep(0.2)
@@ -63,16 +63,16 @@ def getMarker(robot, tool_changer, unlock, lock, marker_payload, marker_tcp):
 def returnMarker(robot, tool_changer, unlock, normal_payload, normal_tcp):
     home(robot)
     robot.set_tcp(normal_tcp)
-    robot.movel((0.25525, -0.69405, 0.29491, 0, 3.141, -0.007), 0.7, 0.7)
-    robot.movel((0.25525, -0.69407, 0.07763, 0, 3.141, -0.007), 0.7, 0.7)
-    robot.movel((0.25521, -0.69403, 0.00607, 0.001, 3.141, -0.006), 0.1, 0.1) 
+    robot.movel((0.26055, -0.03720, 0.48702, 2.204, 2.247, -0.067), 0.7, 0.7)
+    robot.movel((0.26055, -0.03720, 0.28893, 2.204, 2.247, -0.067), 0.7, 0.7)
+    robot.movel((0.26055, -0.03720, 0.23795, 2.204, 2.247, -0.067), 0.05, 0.05) 
     time.sleep(0.2)
     tool_changer.write(unlock)
     time.sleep(0.2)
     robot.set_payload(normal_payload)
     time.sleep(0.2)
-    robot.movel((0.25525, -0.69407, 0.07763, 0, 3.141, -0.007), 0.2, 0.2)
-    robot.movel((0.25525, -0.69405, 0.29491, 0, 3.141, -0.007), 0.7, 0.7)
+    robot.movel((0.26055, -0.03720, 0.28893, 2.204, 2.247, -0.067), 0.1, 0.1)
+    robot.movel((0.26055, -0.03720, 0.48702, 2.204, 2.247, -0.067), 0.7, 0.7)
     home(robot)
 
 def offset(corner, offset, normal):
@@ -88,7 +88,7 @@ def generatePath(points, normal, rx, ry, rz):
     path.append((last_point, rx, ry, rz))
     return path
 
-# Perform the grinding task
+# Perform the surface check task
 def checkSurface(ur_control, acc, vel, normal_vector, points, tool_changer):
     home(ur_control.robot, 0.5, 0.5)
     lock = 0
