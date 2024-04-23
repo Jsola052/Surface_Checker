@@ -43,11 +43,11 @@ def vector_to_euler_angles(target_normal):
    return roll, pitch, yaw
 
 def getMarker(robot, tool_changer, unlock, lock, marker_payload, marker_tcp):
-    home(robot)
+    home(robot, 0.5, 0.5)
     robot.set_tcp((0,0,0,0,0,0))
     tool_changer.write(unlock)
-    robot.movel((0.26055, -0.03720, 0.48702, 2.204, 2.247, -0.067), 0.7, 0.7)
-    robot.movel((0.26055, -0.03720, 0.28893, 2.204, 2.247, -0.067), 0.7, 0.7)
+    robot.movel((0.26055, -0.03720, 0.48702, 2.204, 2.247, -0.067), 0.3, 0.3)
+    robot.movel((0.26055, -0.03720, 0.28893, 2.204, 2.247, -0.067), 0.3, 0.3)
     robot.movel((0.26055, -0.03720, 0.23795, 2.204, 2.247, -0.067), 0.05, 0.05)
     time.sleep(0.2)  
     tool_changer.write(lock)
@@ -55,16 +55,16 @@ def getMarker(robot, tool_changer, unlock, lock, marker_payload, marker_tcp):
     robot.set_payload(marker_payload)
     time.sleep(0.2)
     robot.movel((0.26055, -0.03720, 0.28893, 2.204, 2.247, -0.067), 0.1, 0.1)
-    robot.movel((0.26055, -0.03720, 0.48702, 2.204, 2.247, -0.067), 0.7, 0.7)
-    home(robot)
+    robot.movel((0.26055, -0.03720, 0.48702, 2.204, 2.247, -0.067), 0.3, 0.3)
+    home(robot, 0.5, 0.5)
     robot.set_tcp(marker_tcp)
     time.sleep(0.2)
     
 def returnMarker(robot, tool_changer, unlock, normal_payload, normal_tcp):
-    home(robot)
+    home(robot, 0.5, 0.5)
     robot.set_tcp(normal_tcp)
-    robot.movel((0.26055, -0.03720, 0.48702, 2.204, 2.247, -0.067), 0.7, 0.7)
-    robot.movel((0.26055, -0.03720, 0.28893, 2.204, 2.247, -0.067), 0.7, 0.7)
+    robot.movel((0.26055, -0.03720, 0.48702, 2.204, 2.247, -0.067), 0.3, 0.3)
+    robot.movel((0.26055, -0.03720, 0.28893, 2.204, 2.247, -0.067), 0.3, 0.3)
     robot.movel((0.26055, -0.03720, 0.23795, 2.204, 2.247, -0.067), 0.05, 0.05) 
     time.sleep(0.2)
     tool_changer.write(unlock)
@@ -72,8 +72,8 @@ def returnMarker(robot, tool_changer, unlock, normal_payload, normal_tcp):
     robot.set_payload(normal_payload)
     time.sleep(0.2)
     robot.movel((0.26055, -0.03720, 0.28893, 2.204, 2.247, -0.067), 0.1, 0.1)
-    robot.movel((0.26055, -0.03720, 0.48702, 2.204, 2.247, -0.067), 0.7, 0.7)
-    home(robot)
+    robot.movel((0.26055, -0.03720, 0.48702, 2.204, 2.247, -0.067), 0.3, 0.3)
+    home(robot, 0.5, 0.5)
 
 def offset(corner, offset, normal):
    corner_new = corner - offset*normal
