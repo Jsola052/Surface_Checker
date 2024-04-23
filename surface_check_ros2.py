@@ -96,7 +96,7 @@ def checkSurface(ur_control, acc, vel, normal_vector, points, tool_changer):
     marker_payload = 1.200
     normal_payload = 1.100
     normal_tcp = (0, 0, 0, 0, 0, 0)
-    marker_tcp = (0, 0, 0.21963, 0, 0, 0)
+    marker_tcp = (0, 0, 0.22563, 0.0017, 3.1368, -0.0013)
     getMarker(ur_control.robot, tool_changer, unlock, lock, marker_payload, marker_tcp)
     ur_control.robot.set_payload(marker_payload)
     ur_control.robot.set_tcp(marker_tcp)
